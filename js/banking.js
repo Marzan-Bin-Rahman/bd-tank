@@ -1,39 +1,43 @@
 function getInputValue(inputId){
-    const depositInput = document.getElementById(inputId);
-    const depositInputText = depositInput.value;
-    const depositAmount = parseFloat(depositInputText);
-    depositInput.value = "";
-    return depositAmount;
+    const input = document.getElementById(inputId);
+    const inputText = input.value;
+    const amount = parseFloat(inputText);
+    input.value = "";
+    return amount;
 }
 
 function addingToTotal(inputId, depositAmount){
-    const depositTotal = document.getElementById(inputId);
-    const depositTotalText = depositTotal.innerText;
-    const depositTotalAmount = parseFloat(depositTotalText);
-    depositTotal.innerText = depositTotalAmount + depositAmount;
+    const total = document.getElementById(inputId);
+    const totalText = total.innerText;
+    const totalAmount = parseFloat(totalText);
+    total.innerText = totalAmount + depositAmount;
 }
 
-function updateTotal(isAdd){
-    const balanceTotal = document.getElementById('balance-total');
+function updateTotal(amount, isAdd){
+    const balanceTotal = document.getElementById("balance-total");
     const balanceTotalText = balanceTotal.innerText;
     const balanceTotalAmount = parseFloat(balanceTotalText);
+    balanceTotal.innerText = balanceTotalAmount + amount;
     if(isAdd == true){
-        balanceTotal.innerText = balanceTotalAmount + depositAmount;
+        balanceTotal.innerText = balanceTotalAmount + amount;
     }
     else{
-        balanceTotal.innerText = balanceTotalAmount - depositAmount;
+        balanceTotal.innerText = balanceTotalAmount - amount;
     }
 }
 
 // game with deposit
 document.getElementById('deposit-button').addEventListener('click', function(){
+    depositAmount = getInputValue('deposit-input');
+    if(depositAmount > 0){
+    addingToTotal("deposit-total", depositAmount);
+    updateTotal(depositAmount, true);
+    }
     // getting deposit input
 /*     const depositInput = document.getElementById('deposit-input');
     const depositInputText = depositInput.value;
     const depositAmount = parseFloat(depositInputText); */
-    depositAmount = getInputValue('deposit-input');
-    addingToTotal("deposit-total", depositAmount);
-    updateTotal(true);
+
 
 
     // getting the amount
@@ -57,9 +61,11 @@ document.getElementById('deposit-button').addEventListener('click', function(){
 
 document.getElementById('withdraw-button').addEventListener('click', function(){
     withdrawAmount = getInputValue('withdraw-input');
-    addingToTotal("withdraw-total", withdrawAmount);
-    updateTotal(false);
-    
+    if(withdrawAmount > 0){
+        addingToTotal("withdraw-total", withdrawAmount);
+        updateTotal(withdrawAmount, false);
+    }
+
     /* const withdrawInput = document.getElementById('withdraw-input');
     const withdrawInputText = withdrawInput.value;
     const withdrawAmount = parseFloat(withdrawInputText); */
