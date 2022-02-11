@@ -33,6 +33,9 @@ document.getElementById('deposit-button').addEventListener('click', function(){
     addingToTotal("deposit-total", depositAmount);
     updateTotal(depositAmount, true);
     }
+    else{
+        alert("Please check your input!");
+    }
     // getting deposit input
 /*     const depositInput = document.getElementById('deposit-input');
     const depositInputText = depositInput.value;
@@ -64,6 +67,9 @@ document.getElementById('withdraw-button').addEventListener('click', function(){
     if(withdrawAmount > 0){
         addingToTotal("withdraw-total", withdrawAmount);
         updateTotal(withdrawAmount, false);
+    }
+    else{
+        alert("Please check your input!");
     }
 
     /* const withdrawInput = document.getElementById('withdraw-input');
